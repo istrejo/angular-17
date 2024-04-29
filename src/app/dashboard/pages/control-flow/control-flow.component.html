@@ -1,0 +1,76 @@
+<app-title title="Control Flow" withShadow />
+
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+  <div class="bg-white rounded shadow p-10">
+    <h2>if: {{ showContent() }}</h2>
+
+    <button
+      pButton
+      pRipple
+      (click)="toggleContent()"
+      class="inline-flex items-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md"
+    >
+      Restore
+    </button>
+  </div>
+  <!-- @switch -->
+  <div class="bg-white rounded shadow p-10">
+    <h2 class="text-xl">{{ grade() }}</h2>
+    @switch (grade()) { @case ("A") {
+    <h3>Arriba de 90</h3>
+
+    } @case ("B") {
+    <h3>Arriba de 80</h3>
+
+    } @default {
+    <h3>Reprobado</h3>
+
+    } }
+    <p-buttonGroup>
+      <p-button
+        (click)="changeGrade('A')"
+        severity="success"
+        label="A"
+        icon="pi pi-check"
+      ></p-button>
+      <p-button
+        (click)="changeGrade('B')"
+        severity="info"
+        label="B"
+        icon="pi pi-check-circle"
+      ></p-button>
+      <p-button
+        (click)="changeGrade('F')"
+        severity="warning"
+        label="F"
+        icon="pi pi-times"
+      ></p-button>
+    </p-buttonGroup>
+  </div>
+  <div class="bg-white rounded shadow p-10">
+    <ul>
+      @for( framework of frameworks() ; track framework; let i = $index, first =
+      $first, last = $last, even = $even, odd=$odd, count = $count ){
+      <li
+        [class]="{
+          'bg-red-100': even && !first && !last,
+          'bg-purple-100': odd && !first && !last,
+          'bg-blue-100': first || last,
+        }"
+      >
+        {{ i + 1 }}/{{ count }} - {{ framework }}
+      </li>
+      }
+    </ul>
+  </div>
+
+  <div class="bg-white rounded shadow p-10">
+    <ul>
+      @for( framework of frameworks2() ; track framework; let i = $index ){
+      <li>{{ i + 1 }} - {{ framework }}</li>
+      } @empty {
+      <li>No frameworks added</li>
+      }
+    </ul>
+  </div>
+</section>
